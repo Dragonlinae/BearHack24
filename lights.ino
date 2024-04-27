@@ -6,6 +6,7 @@
 
 #define BRIGHTNESS 10
 #define NUM_LEDS 144
+#define NUM_LEDS_PER_SEGMENT 4
 #define LED_TYPE WS2812
 #define COLOR_ORDER GRB
 
@@ -16,11 +17,10 @@ float r = 255;
 float g = 255;
 float b = 0;
 
-char redbuffer[NUM_LEDS + 1];
-char greenbuffer[NUM_LEDS + 1];
-char bluebuffer[NUM_LEDS + 1];
+char buffer[NUM_LEDS + 1];
 
-int currLED = 0;
+int32_t currLED = 0;
+int32_t maxLED = 0;
 
 bool clicked = true;
 
@@ -40,6 +40,8 @@ void lightssetup() {
     leds[i] = CRGB(0, 0, 0);
   }
   FastLED.show();
+
+  maxLED = (int32_t)height * 1000 - 1;
 }
 
 void lightsloop() {
@@ -55,22 +57,39 @@ void lightsloop() {
       } else {
         dir = -1;
       }
+    } else {
+      currLED += dir * ((int32_t)acMag)/3;
+      if (currLED < 0) {
+        currLED = maxLED + currLED % maxLED;
+      } else if (currLED > maxLED) {
+        currLED %= maxLED;
+      }
     }
+    Serial.println(currLED);
+    Serial.println(dir);
+    strcpy_P(buffer, (char *)pgm_read_ptr(&(color_table[currLED / 1000])));
+
+    int color = 0;
+
     if (dir == 1) {
       for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = red;
+        color = (uint8_t)buffer[i / NUM_LEDS_PER_SEGMENT];
+        color -= 1;
+        leds[i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
       }
     } else {
       for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = green;
+        color = (uint8_t)buffer[i / NUM_LEDS_PER_SEGMENT];
+        color -= 1;
+        leds[i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
       }
     }
     FastLED.show();
   } else {
     dir = 0;
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i] = CRGB(0, 0, 0);
-    }
-    FastLED.show();
+    // for (int i = 0; i < NUM_LEDS; i++) {
+    //   leds[i] = CRGB(0, 0, 0);
+    // }
+    // FastLED.show();
   }
 }
