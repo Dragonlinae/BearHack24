@@ -20,7 +20,7 @@ uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
 
 // orientation/motion vars
-Quaternion q;        // [w, x, y, z]         quaternion container
+Quaternion qq;       // [w, x, y, z]         quaternion container
 VectorInt16 aa;      // [x, y, z]            accel sensor measurements
 VectorInt16 gy;      // [x, y, z]            gyro sensor measurements
 VectorInt16 aaReal;  // [x, y, z]            gravity-free accel sensor measurements
@@ -146,9 +146,9 @@ void imuloop() {
   // read a packet from FIFO
   if (mpu.dmpGetCurrentFIFOPacket(fifoBuffer)) { // Get the Latest packet
 
-    mpu.dmpGetQuaternion(&q, fifoBuffer);
-    mpu.dmpGetGravity(&gravity, &q);
-    mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+    mpu.dmpGetQuaternion(&qq, fifoBuffer);
+    mpu.dmpGetGravity(&gravity, &qq);
+    mpu.dmpGetYawPitchRoll(ypr, &qq, &gravity);
     // Serial.print("ypr\t");
     // Serial.print(ypr[0] * 180 / M_PI);
     // Serial.print("\t");
@@ -156,9 +156,9 @@ void imuloop() {
     // Serial.print("\t");
     // Serial.print(ypr[2] * 180 / M_PI);
 
-    mpu.dmpGetQuaternion(&q, fifoBuffer);
+    mpu.dmpGetQuaternion(&qq, fifoBuffer);
     mpu.dmpGetAccel(&aa, fifoBuffer);
-    mpu.dmpGetGravity(&gravity, &q);
+    mpu.dmpGetGravity(&gravity, &qq);
     mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
     // Serial.print("areal\t");
     // Serial.print(aaReal.x);
@@ -182,8 +182,6 @@ void imuloop() {
     acx = aaReal.x;
     acy = aaReal.y;
     acz = aaReal.z;
-
-    acMag = sqrt(ax * ax + ay * ay + az * az);
 
     // blink LED to indicate activity
     blinkState = !blinkState;
