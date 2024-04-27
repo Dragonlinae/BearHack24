@@ -60,13 +60,15 @@ void lightsloop() {
     } else {
       currLED += dir * ((int32_t)acMag)/3;
       if (currLED < 0) {
-        currLED = maxLED + currLED % maxLED;
+        currLED = 0;
+        // currLED = maxLED + currLED % maxLED;
       } else if (currLED > maxLED) {
-        currLED %= maxLED;
+        currLED = maxLED;
+        // currLED %= maxLED;
       }
     }
-    Serial.println(currLED);
-    Serial.println(dir);
+    Serial.println(currLED/10/height);
+    // Serial.println(dir);
     strcpy_P(buffer, (char *)pgm_read_ptr(&(color_table[currLED / 1000])));
 
     int color = 0;

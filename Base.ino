@@ -13,11 +13,11 @@ void loop() {
   imuloop();
   lightsloop();
   acMag = sqrt(acx * acx + acy * acy + acz * acz);
-  Serial.println(acMag);
+  // Serial.println(acMag);
   if (acMag > 1000) {
     acDir = atan2(acx, acy) * 180 / M_PI;
-    Serial.print(acDir);
-    Serial.println(acMag);
+    // Serial.print(acDir);
+    // Serial.println(acMag);
     if (acMag > 3000) {
       moving = true;
     }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Someone send help</title>
+  <!--html frontend, python backend-->
+</head>
+
+<body>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+  </form>
+  <br>
+  <form action="/generate" method="post">
+    <input type="text" name="text" />
+    <input type="submit" value="Generate" />
+  </form>
+</body>
+
+</html>
