@@ -1,9 +1,14 @@
-void setup() {
-  // put your setup code here, to run once:
+double yaw = 0, pitch = 0, roll = 0;
+int acx = 0, acy = 0, acz = 0;
+double acMag = 0;
 
+void setup() {
+  imusetup();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  imuloop();
+  if (acMag > 1000) {
+    Serial.println(acMag);
+  }
 }
