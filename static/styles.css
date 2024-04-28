@@ -1,0 +1,238 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+}
+
+.logo {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  margin: 20px;
+  padding: 0;
+  background-image: url(./logo.png);
+  background-size: cover;
+}
+
+.title {
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  text-align: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  width: 60vw;
+  margin: 20px auto;
+  margin-top: 0;
+  border-radius: 0 0 50px 50px;
+  border: 10px solid #12797E;
+  border-top: none;
+  background-color: black;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  width: 40vw;
+  margin: 20px auto;
+  border-radius: 50px;
+  border: 5px dashed #12797E;
+  position: relative;
+}
+
+.text-container {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  width: 40vw;
+  margin: 20px auto;
+}
+
+.sd-container {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  width: 40vw;
+  margin: 20px auto;
+}
+
+.text-input {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 2em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+  border: 5px solid #12797E;
+  border-radius: 50px;
+}
+
+.text-submit {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0;
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  background-color: #12797E;
+  border: 5px solid #12797E;
+  border-radius: 50px;
+}
+
+.container-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 5em;
+  width: 60vw;
+  margin: 20px auto;
+  margin-bottom: 0;
+  border-radius: 50px 50px 0 0;
+  border: 10px solid #12797E;
+  overflow: hidden;
+  border-bottom: none;
+  background-color: black;
+}
+
+.container-option-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 10px solid #12797E;
+  background-color: transparent;
+  color: white;
+}
+
+.container-option-button.active {
+  border-bottom: none;
+}
+
+.right-border {
+  border-right: 5px solid #12797E;
+}
+
+.left-border {
+  border-left: 5px solid #12797E;
+}
+
+.fill-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.prompt-text {
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-align: center;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 40vw;
+  margin: 20px auto;
+  position: relative;
+  image-rendering: optimizeSpeed;
+  /* STOP SMOOTHING, GIVE ME SPEED  */
+  image-rendering: -moz-crisp-edges;
+  /* Firefox                        */
+  image-rendering: -o-crisp-edges;
+  /* Opera                          */
+  image-rendering: -webkit-optimize-contrast;
+  /* Chrome (and eventually Safari) */
+  image-rendering: pixelated;
+  /* Universal support since 2021   */
+  image-rendering: optimize-contrast;
+  /* CSS3 Proposed                  */
+  -ms-interpolation-mode: nearest-neighbor;
+  /* IE8+                           */
+}
+
+.preview {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.preview-image {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.upload-arduino-button {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0;
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  background-color: #12797E;
+  border: 5px solid #12797E;
+  border-radius: 50px;
+}

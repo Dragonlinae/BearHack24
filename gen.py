@@ -1,6 +1,5 @@
 filename = "image.png"
 
-# open rainbow.png, resize it to 144 width (maintain height ratio), and save it as rainbow_small.png
 from PIL import Image
 
 def resize_image(filename, new_width):

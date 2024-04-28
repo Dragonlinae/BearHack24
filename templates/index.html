@@ -2,20 +2,60 @@
 <html>
 
 <head>
-  <title>Someone send help</title>
-  <!--html frontend, python backend-->
+  <title>LEDSaber</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="{{ url_for('static',filename='script.js') }}"></script>
 </head>
 
 <body>
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" value="Upload" />
-  </form>
-  <br>
-  <form action="/generate" method="post">
-    <input type="text" name="text" />
-    <input type="submit" value="Generate" />
-  </form>
+  <div class="logo"></div>
+  <div class="title">
+    <h1>LEDSaber</h1>
+    <p>Generate LED saber animations from images and text</p>
+  </div>
+  <div class="container-options">
+    <button id="upload-container" class="container-option-button right-border active">Upload</button>
+    <button id="text-container" class="container-option-button left-border right-border">Text</button>
+    <button id="sd-container" class="container-option-button left-border">SD</button>
+  </div>
+  <div class="main-container">
+    <div class="upload-container">
+      <form action="/upload" method="post" enctype="multipart/form-data" class="fill-container"
+        ondrop="dropHandler(event);" onchange="uploadHandler(event);">
+        <p class="fill-container prompt-text">Drag and drop a file here or click to upload</p>
+        <input type="file" name="file" class="fill-container invisible">
+      </form>
+      <br>
+    </div>
+    <div class="text-container" style="display: none;">
+      <form action="/generate" method="post">
+        <input class="text-input" type="text" name="text" placeholder="Enter text here" required />
+        <input class="text-submit" type="submit" value="Generate" />
+      </form>
+    </div>
+    <div class="sd-container" style="display: none;">
+      <form action="/generatesd" method="post">
+        <input class="text-input" type="text" name="text" placeholder="Enter text here" required />
+        <input class="text-submit" type="submit" value="Generate" />
+      </form>
+    </div>
+  </div>
+  <div class="preview-container">
+    <div class="preview">
+      <img class="preview-image" src="{{img}}" />
+    </div>
+  </div>
+  <div class="preview-container">
+    <div class="preview">
+      <img class="preview-image" src="{{imgsmall}}" />
+    </div>
+  </div>
+  <div class="upload-arduino-container">
+    <form action="/uploadarduino" method="post">
+      <input class="upload-arduino-button" type="submit" value="Upload to Arduino" />
+    </form>
+  </div>
 </body>
 
 </html>
