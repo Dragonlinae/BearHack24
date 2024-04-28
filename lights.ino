@@ -50,7 +50,19 @@ void lightsloop() {
   pinMode(BUTTON_PIN, OUTPUT);
   digitalWrite(BUTTON_PIN, LOW);
 
-  if (buttonState == HIGH && moving) {
+  if (!moving) {
+    currLED = -100;
+    strcpy_P(buffer, (char *)pgm_read_ptr(&(color_table[0])));
+    int color;
+    for (int i = 0; i < NUM_LEDS; i++) {
+      color = (uint8_t)buffer[i / NUM_LEDS_PER_SEGMENT];
+      color -= 1;
+      leds[i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
+    }
+    FastLED.show();
+  }
+
+  if (buttonState == HIGH || moving) {
     if (dir == 0) {
       if (acDir > 0) {
         dir = 1;
@@ -58,7 +70,18 @@ void lightsloop() {
         dir = -1;
       }
     } else {
-      currLED += dir * ((int32_t)acMag)/3;
+      if (acDir > 0) {
+        dir = 1;
+      } else {
+        dir = -1;
+      }
+      if (currLED == -100 && dir < 0 ) {
+        currLED = maxLED;
+      } else if (currLED == -100 && dir > 0) {
+        currLED = 0;
+      } else {
+        currLED += dir * ((int32_t)acMag)/3;
+      }
       if (currLED < 0) {
         currLED = 0;
         // currLED = maxLED + currLED % maxLED;
@@ -77,13 +100,13 @@ void lightsloop() {
       for (int i = 0; i < NUM_LEDS; i++) {
         color = (uint8_t)buffer[i / NUM_LEDS_PER_SEGMENT];
         color -= 1;
-        leds[i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
+        leds[NUM_LEDS-1-i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
       }
     } else {
       for (int i = 0; i < NUM_LEDS; i++) {
         color = (uint8_t)buffer[i / NUM_LEDS_PER_SEGMENT];
         color -= 1;
-        leds[i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
+        leds[NUM_LEDS-1-i] = CRGB(color / 36 * 43, (color % 36) / 6 * 43, color % 6 * 43);
       }
     }
     FastLED.show();

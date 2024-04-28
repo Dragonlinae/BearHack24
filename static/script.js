@@ -23,6 +23,21 @@ $(document).ready(function () {
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
   });
+
+  $('#preview-container').click(function () {
+    $('.preview-container').show();
+    $('.preview-small-container').hide();
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+  });
+
+  $('#preview-small-container').click(function () {
+    $('.preview-container').hide();
+    $('.preview-small-container').show();
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+  });
+
 });
 
 function dropHandler(event) {

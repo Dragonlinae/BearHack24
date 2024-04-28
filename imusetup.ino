@@ -155,6 +155,7 @@ void imuloop() {
     // Serial.print(ypr[1] * 180 / M_PI);
     // Serial.print("\t");
     // Serial.print(ypr[2] * 180 / M_PI);
+    // Serial.print("\n");
 
     mpu.dmpGetQuaternion(&qq, fifoBuffer);
     mpu.dmpGetAccel(&aa, fifoBuffer);

@@ -24,7 +24,7 @@ def upload():
   file.save(filename)
   img = resize_image(filename, resize_width)
   generate_code(img)
-  return render_template('index.html', img="static/" + filename.replace(".png", "_small.png?t=" + str(time.time())))
+  return render_template('index.html', img="static/" + filename.replace(".png", ".png?t=" + str(time.time())), imgsmall="static/" + filename.replace(".png", "_small.png?t=" + str(time.time())))
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -38,7 +38,7 @@ def generate():
   img.save(filename)
   img = resize_image(filename, resize_width)
   generate_code(img)
-  return render_template('index.html', img="static/" + filename.replace(".png", "_small.png?t=" + str(time.time())))
+  return render_template('index.html', img="static/" + filename.replace(".png", ".png?t=" + str(time.time())), imgsmall="static/" + filename.replace(".png", "_small.png?t=" + str(time.time())))
 
 @app.route('/generatesd', methods=['POST'])
 def generatesd():
@@ -48,7 +48,7 @@ def generatesd():
   prompt_to_image(workflow, postext, "", True)
   img = resize_image(filename, resize_width)
   generate_code(img)
-  return render_template('index.html', img="static/" + filename.replace(".png", "_small.png?t=" + str(time.time())))
+  return render_template('index.html', img="static/" + filename.replace(".png", ".png?t=" + str(time.time())), imgsmall="static/" + filename.replace(".png", "_small.png?t=" + str(time.time())))
 
 @app.route('/uploadarduino', methods=['POST'])
 def uploadarduino():
@@ -57,6 +57,7 @@ def uploadarduino():
 
 def resize_image(filename, new_width):
   img = Image.open(filename)
+  img.save("static/" + filename)
   width, height = img.size
   new_height = int(new_width * height / width)
   new_height = min(new_height, 200)
